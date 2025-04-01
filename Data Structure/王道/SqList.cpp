@@ -154,7 +154,95 @@ bool Delete_Same(SqList &L){
 	return true;
 }
 
+/*
+//06
+bool Merge(SeqList A,SeqList B,SeqList &C){
+	if(A.length+B.length>C.MaxSize){
+		return false;
+	}
+	int i=0,j=0,k=0;
+	while(i<A.length&&j<B.length){
+		if(A.data[i]<=B.data[j]){
+			C.data[k++]=A.data[i++];
+		}else{
+			C.data[k++]=B.data[j++];
+		}
+	}
+	while(i<A.length){
+		C.data[k++]=A.data[i++];
+	}
+	while(j<B.length){
+		C.data[k++]=B.data[j++];
+	}
+	C.length=k;
+	return true;
+}
+*/
+
+//07
+void Reverse(ElemType A[],int left,int right,int arraySize){
+	if(left>=right||right>=arraySize){
+		return;
+	}
+	int mid=(left+right)/2;
+	for(int i=0;i<=mid-left;i++){
+		ElemType temp=A[left+i];
+		A[left+i]=A[right-i];
+		A[right-i]=temp;
+	}
+}
+void Exchange(ElemType A[],int m,int n,int arraySize){
+	Reverse(A,0,m+n-1,arraySize);
+	Reverse(A,0,n-1,arraySize);
+	Reverse(A,n,m+n-1,arraySize);
+}
+
+/*
+//08
+void SearchExchangeInsert(ElemType A[],ElemType x){
+	int low=0,high=n-1,mid;
+	while(low<=high){
+		mid=(low+high)/2;
+		if(x==A[mid]){
+			break;
+		}else if(x<A[mid]){
+			high=mid-1;
+		}else{
+			low=mid+1;
+		}
+	}
+	if(x==A[mid]&&mid!=n-1){
+		ElemType temp=A[mid];
+		A[mid]=A[mid+1];
+		A[mid+1]=temp;
+	}
+	if(low>high){
+		for(int i=n-1;i>high;i--){
+			A[i+1]=A[i];
+		}
+		A[i+1]=x;
+	}
+}
+*/
+
+//09
+void SameElem(int A[],int B[],int C[],int n){
+	int i=0,j=0,k=0;
+	while(i<n&&j<n&&k<n){
+		if(A[i]==B[j]&&B[j]==C[k]){
+			cout<<A[i];
+			i++;j++;k++;
+		}else{
+			int maxNum=max(A[i],max(B[j],C[k]));
+			if(A[i]<maxNum) i++;
+			if(B[j]<maxNum) j++;
+			if(C[k]<maxNum) k++;
+		}
+	}
+}
+
 int main(){
+	/*05
 	SqList L;
 	InitList(L);
 	int n,e;
@@ -162,4 +250,9 @@ int main(){
 	ListInput(L,n);
 	Delete_Same(L);
 	ListOutput(L);
+	*/
+	/*09
+	int A[]={1,2,3},B[]={2,3,4},C[]={-1,0,2};
+	SameElem(A,B,C,3); 
+	*/
 }
