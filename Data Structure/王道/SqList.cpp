@@ -241,6 +241,26 @@ void SameElem(int A[],int B[],int C[],int n){
 	}
 }
 
+//10
+void Reverse(int R[],int left,int right){
+	if(left>=right){
+		return;
+	}
+	for(int i=0;i<=(right-left)/2;i++){
+		int temp=R[left+i];
+		R[left+i]=R[right-i];
+		R[right-i]=temp;
+	}
+}
+void LeftShift(int R[],int n,int p){
+	Reverse(R,0,p-1);
+	Reverse(R,p,n-1);
+	Reverse(R,0,n-1);
+}
+
+//11
+
+
 int main(){
 	/*05
 	SqList L;
@@ -254,5 +274,12 @@ int main(){
 	/*09
 	int A[]={1,2,3},B[]={2,3,4},C[]={-1,0,2};
 	SameElem(A,B,C,3); 
+	*/
+	/*10
+	int R[]={1,2,3,4,5,6,7,8};
+	LeftShift(R,8,3);
+	for(int i=0;i<8;i++){
+		cout<<R[i]<<" ";
+	}
 	*/
 }
