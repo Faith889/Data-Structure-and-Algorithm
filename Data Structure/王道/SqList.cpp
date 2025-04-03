@@ -259,7 +259,79 @@ void LeftShift(int R[],int n,int p){
 }
 
 //11
+int Median(int A[],int B[],int n){
+	int l1=0,r1=n-1,m1;
+	int l2=0,r2=n-1,m2;
+	while(l1<r1&&l2<r2){
+		m1=(l1+r1)/2;
+		m2=(l2+r2)/2;
+		if(A[m1]==B[m2]){
+			return A[m1];
+		}else if(A[m1]<B[m2]){
+			if((l1+r1)%2==0){
+				l1=m1;
+				r2=m2;
+			}else{
+				l1=m1+1;
+				r2=m2;
+			}
+		}else{
+			if((l1+r1)%2==0){
+				r1=m1;
+				l2=m2;
+			}else{
+				r1=m1;
+				l2=m2+1;
+			}
+		}
+	}
+	return min(A[l1],B[l2]);
+} 
 
+//12
+int Majority(int A[],int n){
+	int i,m=A[0],cnt=1;
+	for(i=1;i<n;i++){
+		if(A[i]==m){
+			cnt++;
+		}else{
+			if(cnt>0){
+				cnt--;
+			}else{
+				m=A[i];
+				cnt=1;
+			}
+		}
+	}
+	if(cnt>0){
+		for(i=cnt=0;i<n;i++){
+			if(A[i]==m){
+				cnt++;
+			}
+		}
+	}
+	if(cnt>n/2){
+		return m;
+	}else{
+		return -1;
+	}
+}
+
+//13
+int MinPosInt(int A[],int n){
+	int i,I[n]={0};
+	for(i=0;i<n;i++){
+		if(A[i]>=1&&A[i]<=n){
+			I[A[i]-1]=1;
+		}
+	}
+	for(i=0;i<n;i++){
+		if(I[i]==0){
+			break;
+		}
+	}
+	return i+1;
+}
 
 int main(){
 	/*05
@@ -282,4 +354,14 @@ int main(){
 		cout<<R[i]<<" ";
 	}
 	*/
+	/*11
+	int S1[]={11,13,15,17,19},S2[]={2,4,6,8,20};
+	cout<<Median(S1,S2,5);
+	*/
+	/*12
+	int A1[]={0,5,5,3,5,7,5,5},A2[]={0,5,5,3,5,1,5,7};
+	cout<<Majority(A1,8)<<endl<<Majority(A2,8);
+	*/
+	int A1[]={-5,3,2,3},A2[]={1,2,3};
+	cout<<MinPosInt(A1,4)<<endl<<MinPosInt(A2,3);
 }
